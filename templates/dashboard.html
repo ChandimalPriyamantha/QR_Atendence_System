@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+
+{% block body %}
+
+     <h1> Dashboard <small> Welcome {{session.username}}</small></h1>
+     <a class ="btn btn-success" href ="/add_student"> Add Student</a>
+     <hr>
+     <table class ='table table-striped'>
+          <tr>
+               <th>ID</th>
+               <th>Name</th>
+               <th>Email</th>
+               <th>Age</th>
+               <th>Language</th>
+               <th>Date</th>
+               <th></th>
+               <th></th>
+          </tr>
+          {% for add_studen in add_student %}
+          <tr>
+               <td>{{add_studen.id}}</td>
+               <td>{{add_studen.name}}</td>
+               <td>{{add_studen.email}}</td>
+               <td>{{add_studen.age}}</td>
+               <td>{{add_studen.language}}</td>
+               <td>{{add_studen.creat_date}}</td>
+               <td> <a href="edit_student/{{add_studen.id}}" class= "btn btn-default pull-right">Edit</a></td>
+               <td>
+                    <form action="{{url_for('delete_article', id=add_studen.id)}}" method="post">
+                         <input type = "hidden" name = "_method" value="DELETE">
+                         <input type = "submit" value="Delete" class ="btn btn-danger">
+                    
+                    </form>
+
+
+               </td>
+          </tr>
+
+          {% endfor %}
+          
+     </table>
+{% endblock %}
